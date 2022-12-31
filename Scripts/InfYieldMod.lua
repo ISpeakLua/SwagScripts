@@ -16,6 +16,10 @@ warn([[
 	CFrame fly and headsit now changes Velocity every step so it wont be buggy and dumbass.
 	That's it
 
+	v1.11 note:
+
+	Also done the same fix to loopgoto, bang, carpet
+
 ]])
 
 if IY_LOADED and not _G.IY_DEBUG == true then
@@ -9961,6 +9965,7 @@ addcmd('loopgoto',{},function(args, speaker)
 			if Players:FindFirstChild(v) then
 				if Players[v].Character ~= nil then
 					getRoot(speaker.Character).CFrame = getRoot(Players[v].Character).CFrame + Vector3.new(distance,1,0)
+					getRoot(speaker.Character).Velocity = Vector3.new(0, 0, 0)
 				end
 				wait(lDelay)
 			else
@@ -10153,6 +10158,7 @@ addcmd('bang',{'rape'},function(args, speaker)
 			pcall(function()
 				local otherRoot = getTorso(Players[bangplr].Character)
 				getRoot(Players.LocalPlayer.Character).CFrame = otherRoot.CFrame * bangOffet
+				getroot(Players.LocalPlayer.Character).Velocity = Vector3.new(0, 0, 0)
 			end)
 		end)
 	end
@@ -10187,6 +10193,7 @@ addcmd('carpet',{},function(args, speaker)
 			carpetLoop = RunService.Heartbeat:Connect(function()
 				pcall(function()
 					getRoot(Players.LocalPlayer.Character).CFrame = getRoot(Players[carpetplr].Character).CFrame
+					getRoot(Players.LocalPlayer.Character).Velocity = Vector3.new(0, 0, 0)
 				end)
 			end)
 		end
