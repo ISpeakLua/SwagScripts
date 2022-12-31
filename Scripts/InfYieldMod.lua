@@ -6,7 +6,7 @@
 ]]
 
 --You can view the source there, changing the link will break queue_on_teleport
-local githubrepo = 'https://raw.githubusercontent.com/ISpeakLua/SwagScripts/InfYieldMod'
+local githubrepo = 'https://raw.githubusercontent.com/ISpeakLua/SwagScripts/InfYieldMod.lua'
 
 warn([[
 	>SwagMod v1.1 Running
@@ -19,6 +19,10 @@ warn([[
 	v1.11 note:
 
 	Also done the same fix to loopgoto, bang, carpet
+
+	v1.11.5 note:
+
+	fixed queue_on_teleport
 
 ]])
 
@@ -38,7 +42,7 @@ if not game:IsLoaded() then
 	notLoaded:Destroy()
 end
 
-ver = '5.9.1 <font size="15">SM v1.1</font>'
+ver = '5.9.1 <font size="15">SM v1.11</font>'
 
 Players = game:GetService("Players")
 
