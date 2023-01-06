@@ -5,9 +5,6 @@ local MessageEvent = Instance.new('BindableEvent')
 
 local Old
 
---//note: sometimes crashes on fluxus cuz its shit
---//to-do: make sure integration is handled by the core script
-
 local SWRunning = getgenv().SWRunning
 if SWRunning then
     getgenv().MessagesSecured = 0
@@ -33,3 +30,5 @@ end)
 if SWRunning then
     getgenv().SWPipe:Fire('AntiChatLogger')
 end
+
+getgenv().ACL = true
