@@ -4,31 +4,12 @@ local PostMessage = require(chatmain).MessagePosted
 local MessageEvent = Instance.new('BindableEvent')
 
 local Old
-
-local SWRunning = getgenv().SWRunning
-if SWRunning then
-    getgenv().MessagesSecured = 0
-else
-    SWRunning = false
-end
-
-getgenv().ACLEnabled = true
-
 Old = hookfunction(PostMessage.fire, function(Self, msg)
     if not checkcaller() and Self == PostMessage and getgenv().ACLEnabled == true then
         MessageEvent:Fire(msg)
-        if SWRunning then
-            pcall(function()
-                getgenv().MessagesSecured+=1
-            end)
-        end
         return
     end
     return Old(Self, msg)
 end)
-
-if SWRunning then
-    getgenv().SWPipe:Fire('AntiChatLogger')
-end
 
 getgenv().ACL = true
