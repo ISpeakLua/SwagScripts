@@ -8,24 +8,6 @@
 --You can view the source there, changing the link will break queue_on_teleport
 local githubrepo = 'https://raw.githubusercontent.com/ISpeakLua/SwagScripts/InfYieldMod.lua'
 
-warn([[
-	>SwagMod v1.1 Running
-
-	v1.1 improvements:
-
-	CFrame fly and headsit now changes Velocity every step so it wont be buggy and dumbass.
-	That's it
-
-	v1.11 note:
-
-	Also done the same fix to loopgoto, bang, carpet
-
-	v1.11.5 note:
-
-	fixed queue_on_teleport
-
-]])
-
 if IY_LOADED and not _G.IY_DEBUG == true then
 	-- error("Infinite Yield is already running!",0)
 	return
@@ -42,7 +24,7 @@ if not game:IsLoaded() then
 	notLoaded:Destroy()
 end
 
-ver = '5.9.1 <font size="15">SM v1.11</font>'
+ver = '5.9.1 <font size="15">SM</font>'
 
 Players = game:GetService("Players")
 
@@ -12147,4 +12129,23 @@ coroutine.wrap(function()
 	Credits:Destroy()
 	IntroBackground:Destroy()
 	minimizeHolder()
+
+	local mt = getrawmetatable(game)
+	setreadonly(mt, false)
+	local old = mt.__namecall
+	mt.__namecall = newcclosure(function(Self, ...)
+    	if getnamecallmethod() == 'GetFocusedTextBox' and Self == game:GetService('UserInputService') then
+			local args = {...}
+        	local textbox = old(Self, unpack(args))
+			if textbox then
+				for i, v in pairs(Holder:GetDescendants()) do
+					if textbox == v then
+						textbox = nil
+					end
+				end
+			end
+        	return textbox
+    	end
+    	return old(Self, ...)
+	end)
 end)()
